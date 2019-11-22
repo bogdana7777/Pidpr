@@ -16,23 +16,32 @@
       <table>
         <tr>
           <th> #</th>
-          <th>Автор</th>
-          <th>Назва</th>
-          <th>Ціна</th>
+          <th>Ім'я водія</th>
+          <th>Марка машини</th>
+          <th>Колір машини</th>
+          <th>Номер машини</th>
         </tr>
-        <tr v-for="(book, index) in books" v-bind:key="book.title">
+        <tr v-for="(driver, index) in drivers" v-bind:key="driver.mark">
             <td> {{index+1}}</td>
-            <td> {{book.author}}</td>
-            <td> {{book.title}}</td>
-            <td> {{book.price}}</td>
-            <td> <button v-on:click="deleteElement(index)">  Delete  </button></td>      
+            <td> {{driver.name}}</td>
+            <td> {{driver.mark}}</td>
+            <td> {{driver.color}}</td>
+            <td> {{driver.number}}</td>
+            <td> <button v-on:click="deleteElement(index)">  Delete  </button></td>   
+            <td> <button v-on:click="editElement(index)">  Edit  </button></td>   
         </tr>
       </table>
-
-      <label> Автор <input v-model="newBook.author"></label>
-      <label> Назва <input v-model="newBook.title"></label>
-      <label> Ціна <input v-model="newBook.price"></label>
-      <button v-on:click="addElement(newBook)"> Додати книгу </button>
+<form v-if="bool == true">
+      <label> Ім'я водія <input v-model="newDriver.name"></label>
+      <label> Марка машини <input v-model="newDriver.mark"></label>
+      <label> Колір машини <input v-model="newDriver.color"></label>
+      <label> Номер машини <input v-model="newDriver.number"></label>
+      
+</form>
+      <br/>
+      <button type="button" v-on:click="addElement(newDriver)"> Додати водія </button> <br/><br/>
+      <button v-on:click="toggleForm(newDriver)"> Додати </button> <br/><br/>
+      <button v-on:click="editElement(newDriver)"> Редагувати водія </button>
   </div>
 </template>
 
@@ -44,8 +53,9 @@ export default {
         /*text: "Деякий текст",
         numbers: [1,3,-5,2,6,9],
         newNumber:0*/
-        newBook:{author:"", title:"",price:0},
-        books: [{autor:"Шевченко", title:"Кобзар",price:499.95},{author:"Кінг", title:"Воно",price:600.00}]
+        newDriver:{name:"", mark:"",price:"",number:""},
+        drivers: [{name:"Горей Л.", mark:"Mercedes",color:"black",number:"AO 2378 AI"},{name:"Половко І.", mark:"Volkswagen",color:"white",number:"AO 2329 AI"}],
+        bool: false
     }
   } ,
   methods:{/*
@@ -64,14 +74,25 @@ export default {
       }
     }*/
 
-    addElement:function(value){
-      let copy = Object.assign({}, value);   
-      this.books.push(copy);
+    addElement:function(){
+      this.bool = true;
     },
 
     deleteElement: function(index){
-      this.books.splice(index,1);
+      this.drivers.splice(index,1);
     },
+    editElement:function(index){
+      let copy = Object.assign({}, index);   
+      this.drivers.push(copy);
+    },
+    toggleForm:function(value){
+      let copy = Object.assign({}, value);   
+      this.drivers.push(copy);
+      this.bool = false;
+    },
+    editElement:function(index){
+
+    }
   } 
 }
 </script>
