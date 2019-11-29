@@ -58,21 +58,7 @@ export default {
         bool: false
     }
   } ,
-  methods:{/*
-    alertElement: function(value){
-      alert(value);
-    },
-    deleteElement: function(index){
-      this.numbers.splice(index,1);
-    },
-    addElement:function(value){
-      if (+value || value===0){
-        this.numbers.push(value);
-      } else{
-        this.newNumber = "";
-        alert("Ви ввели не число!");
-      }
-    }*/
+  methods:{
 
     addElement:function(){
       this.bool = true;
